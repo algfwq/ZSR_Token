@@ -40,13 +40,13 @@ CELERY_RESULT_BACKEND = os.environ.get('CELERY_RESULT_BACKEND', 'redis://127.0.0
 CELERY_TIMEZONE = 'Asia/Shanghai'
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_TASK_TRACK_STARTED = True
-CELERY_TASK_TIME_LIMIT = 30 * 60
+CELERY_TASK_TIME_LIMIT = 60 * 60
 
 # 定义Celery定时任务
 CELERY_BEAT_SCHEDULE = {
     'delete': {
         'task': 'ZSR_Token.tasks.delete_expired_data',
-        'schedule': 10,  # 定时任务每10秒执行一次
+        'schedule': 60 * 60,  # 定时任务每10秒执行一次
     },
 }
 
