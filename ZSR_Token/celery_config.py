@@ -2,6 +2,7 @@ import os
 from celery import Celery
 
 # eventlet非常重要，Windows特有
+# 定时任务要在shared_task加name参数
 # celery -A ZSR_Token worker -l INFO -P eventlet
 # 周期任务：celery -A ZSR_Token beat -l info
 
