@@ -33,9 +33,9 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 
 #celery配置内容
-CELERY_BROKER_URL = os.environ.get('CELERY_BROKER_URL', 'redis://:@127.0.0.1:6379/0')
+CELERY_BROKER_URL = os.environ.get('CELERY_BROKER_URL', 'redis://:@localhost:6379/0')
 # 存储结果后端
-CELERY_RESULT_BACKEND = os.environ.get('CELERY_RESULT_BACKEND', 'redis://127.0.0.1:6379/7')
+CELERY_RESULT_BACKEND = os.environ.get('CELERY_RESULT_BACKEND', 'redis://localhost:6379/7')
 # 时区
 CELERY_TIMEZONE = 'Asia/Shanghai'
 CELERY_TASK_SERIALIZER = 'json'

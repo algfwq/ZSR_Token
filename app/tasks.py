@@ -3,7 +3,6 @@ from .models import UserToken
 from datetime import timedelta
 from django.utils import timezone
 
-
 # shared_task重要参数name
 @shared_task(name="ZSR_Token.tasks.delete_expired_data")
 def delete_expired_data():
