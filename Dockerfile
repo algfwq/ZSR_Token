@@ -19,4 +19,4 @@ RUN pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 EXPOSE 8000
 
 #运行项目
-CMD python manage.py runserver 0.0.0.0:8000
+CMD python manage.py runserver 0.0.0.0:8000 & celery -A ZSR_Token worker -l INFO & celery -A ZSR_Token beat -l info

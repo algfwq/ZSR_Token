@@ -17,7 +17,6 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
@@ -29,13 +28,18 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
-
 # Application definition
 
-#celery配置内容
-CELERY_BROKER_URL = os.environ.get('CELERY_BROKER_URL', 'redis://:@localhost:6379/0')
+# # celery配置内容
+# CELERY_BROKER_URL = os.environ.get('CELERY_BROKER_URL', 'redis://127.0.0.1:6379/0')
+# # 存储结果后端
+# CELERY_RESULT_BACKEND = os.environ.get('CELERY_RESULT_BACKEND', 'redis://127.0.0.1:6379/7')
+
+# celery配置内容,在docker中使用
+CELERY_BROKER_URL = os.environ.get('CELERY_BROKER_URL', 'redis://redis:6379/0')
 # 存储结果后端
-CELERY_RESULT_BACKEND = os.environ.get('CELERY_RESULT_BACKEND', 'redis://localhost:6379/7')
+CELERY_RESULT_BACKEND = os.environ.get('CELERY_RESULT_BACKEND', 'redis://redis:6379/7')
+
 # 时区
 CELERY_TIMEZONE = 'Asia/Shanghai'
 CELERY_TASK_SERIALIZER = 'json'
@@ -46,7 +50,7 @@ CELERY_TASK_TIME_LIMIT = 60 * 60
 CELERY_BEAT_SCHEDULE = {
     'delete': {
         'task': 'ZSR_Token.tasks.delete_expired_data',
-        'schedule': 60 * 60,  # 定时任务每10秒执行一次
+        'schedule': 60 * 60,  # 定时任务每小时执行一次
     },
 }
 
@@ -92,7 +96,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'ZSR_Token.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
@@ -102,7 +105,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -122,7 +124,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
@@ -135,7 +136,6 @@ TIME_ZONE = 'Asia/Shanghai'
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
